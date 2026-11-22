@@ -10,13 +10,14 @@
 <link rel="icon" type="image/png" href="https://ahmads.build/images/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- Shared Build 52 styles and phone menu, served from the main site so both sites stay in sync. -->
-<link rel="stylesheet" href="https://ahmads.build/assets/brand.css?v=7fdfcc0c">
+<link rel="stylesheet" href="https://ahmads.build/assets/brand.css?v=aa751892">
+<link rel="stylesheet" href="https://ahmads.build/assets/agent-page.css?v=1">
 <script src="https://ahmads.build/assets/site.js" defer></script>
 <script src="https://ahmads.build/assets/gate.js" defer></script>
 <style>
-  /* Tutorial-only styles. Colours, type and buttons come from brand.css. */
+  /* Page layout only. Colours and type come from brand.css and agent-page.css. */
   html { scroll-behavior: smooth; }
   strong, b { font-weight: 600; }
 
@@ -103,21 +104,13 @@
   .actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-4); }
 </style>
 </head>
-<body>
+<body class="agent-page">
 <a class="skip-link" href="#guide">Skip to content</a>
 
-<header class="site-header">
-  <nav class="nav container" aria-label="Main">
-    <a href="https://ahmads.build/" class="logo"><img src="https://ahmads.build/images/logo.png" alt="Build 52 by Ahmad Iqbal – home" width="107" height="32"></a>
-    <div class="nav-menu" id="nav-menu">
-      <a href="https://ahmads.build/about/">About</a>
-      <a href="https://www.linkedin.com/in/ahmadiqbal1" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2LftEg_0td3W-pWEFQwLBZ6LC8GmgLlSoYkhCQzig38rFytq_mOt4pI7OCqQhuaOxfuIOIdP54" class="btn btn-primary">Book a call</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
-      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-    </button>
-  </nav>
+<header class="banner">
+  <span class="banner-tag">One agent a week</span>
+  <a class="wordmark" href="https://ahmads.build/"><img src="https://ahmads.build/images/logo-light.png" alt="Build 52 by Ahmad Iqbal – home" width="147" height="44"></a>
+  <a class="banner-cta" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2LftEg_0td3W-pWEFQwLBZ6LC8GmgLlSoYkhCQzig38rFytq_mOt4pI7OCqQhuaOxfuIOIdP54">Book a call</a>
 </header>
 
 <div class="container">
@@ -240,38 +233,46 @@
 <p class="caption build-note">Built by Ahmad Iqbal as part of building one agent a week, in public. More at <a href="https://ahmads.build">ahmads.build</a>.</p>
 </div>
   <section class="site-cards container" aria-label="Explore the site">
-    <div class="cards">
-      <article class="card">
-        <h2 class="h3">Writing</h2>
-        <p>Weekly notes on what I'm building and learning.</p>
-        <a href="https://ahmads.build/writing/" class="card-link">Read the latest</a>
-      </article>
-      <article class="card">
-        <h2 class="h3">Build with me</h2>
-        <p>Templates and guides to build your own agents.</p>
-        <a href="https://ahmads.build/resources/" class="card-link">See the guides</a>
-      </article>
-      <article class="card">
-        <h2 class="h3">Agents</h2>
-        <p>Ready-made agents to install in Claude. No code needed.</p>
-        <a href="https://ahmads.build/agents/" class="card-link">Install an agent</a>
-      </article>
-    </div>
-  </section>
-
-
+  <div class="cards">
+    <article class="card">
+      <h2 class="h3">Writing</h2>
+      <p>Weekly notes on what I'm building and learning.</p>
+      <a href="https://ahmads.build/writing/" class="card-link">Read the latest</a>
+    </article>
+    <article class="card">
+      <h2 class="h3">Agents</h2>
+      <p>Ready-made agents to install in Claude.</p>
+      <a href="https://ahmads.build/agents/" class="card-link">Install an agent</a>
+    </article>
+    <article class="card">
+      <h2 class="h3">Tutorials</h2>
+      <p>Templates and guides to build your own agents.</p>
+      <a href="https://ahmads.build/resources/" class="card-link">See the guides</a>
+    </article>
+    <article class="card">
+      <h2 class="h3">About</h2>
+      <p>Who I am, and why I'm building one agent a week.</p>
+      <a href="https://ahmads.build/about/" class="card-link">Meet Ahmad</a>
+    </article>
+  </div>
+</section>
 <footer class="site-footer on-dark">
-  <div class="container">
-    <p class="main-line">AI happening to you → AI working for you.</p>
-    <ul class="footer-links">
-      <li><a href="https://ahmads.build/about/">About</a></li>
-      <li><a href="https://ahmads.build/writing/">Writing</a></li>
-      <li><a href="https://ahmads.build/resources/">Build with me</a></li>
-      <li><a href="https://ahmads.build/agents/">Agents</a></li>
-      <li><a href="https://ahmads.build/office-hours/">Office hours</a></li>
-      <li><a href="https://www.linkedin.com/in/ahmadiqbal1" target="_blank" rel="noopener">LinkedIn</a></li>
-    </ul>
-    <p class="copyright">© 2026 Ahmad Iqbal · ahmads.build</p>
+  <div class="container inner">
+    <div>
+      <a class="wordmark" href="https://ahmads.build/"><img src="https://ahmads.build/images/logo-light.png" alt="Build 52 – home" width="133" height="40"></a>
+      <ul class="footer-links">
+        <li><a href="https://ahmads.build/writing/">Writing</a></li>
+        <li><a href="https://ahmads.build/agents/">Agents</a></li>
+        <li><a href="https://ahmads.build/resources/">Tutorials</a></li>
+        <li><a href="https://ahmads.build/about/">About</a></li>
+        <li><a href="https://ahmads.build/office-hours/">Office hours</a></li>
+        <li><a href="https://www.linkedin.com/in/ahmadiqbal1" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="main-line"><s>AI happening to you</s> → <em>AI working for you.</em></p>
+      <p class="copyright">© 2026 Ahmad Iqbal · ahmads.build</p>
+    </div>
   </div>
 </footer>
 
