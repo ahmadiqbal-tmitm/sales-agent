@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Agent tutorial</title>
+<meta property="og:image" content="https://ahmads.build/images/agents/sales-agent.png">
+<meta name="description" content="Build an AI sales agent that finds your ideal customers and drafts your outreach, step by step.">
+<link rel="icon" type="image/png" href="https://ahmads.build/images/favicon.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="https://ahmads.build/images/favicon-light.png" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Shared Build 52 styles and phone menu, served from the main site so both sites stay in sync. -->
+<link rel="stylesheet" href="https://ahmads.build/assets/brand.css?v=7fdfcc0c">
+<script src="https://ahmads.build/assets/site.js" defer></script>
+<script src="https://ahmads.build/assets/gate.js" defer></script>
+<style>
+  /* Tutorial-only styles. Colours, type and buttons come from brand.css. */
+  html { scroll-behavior: smooth; }
+  strong, b { font-weight: 600; }
+
+  .tutorial-intro { padding: var(--space-24) 0 var(--space-12); }
+  .back { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: var(--space-4); }
+  .agent-avatar { display: block; width: 120px; height: 120px; border-radius: var(--radius-md); margin-bottom: var(--space-6); }
+  .tutorial-intro h1 { margin-top: var(--space-4); max-width: 18ch; }
+  .lede { margin-top: var(--space-6); font-size: 20px; line-height: 30px; }
+  .install-note { margin-top: var(--space-4); color: var(--ink-muted); }
+
+  .layout {
+    display: grid; gap: var(--space-12);
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: var(--space-12);
+  }
+  @media (min-width: 1025px) {
+    .layout { grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-24); }
+  }
+
+  /* Reading column */
+  main { max-width: 720px; }
+  main h2 { margin-top: calc(var(--space-12) + var(--space-4)); }
+  main > h2:first-child { margin-top: 0; }
+  main h3 { margin-top: var(--space-6); }
+  main p, main ul, main ol, main dl { margin: var(--space-4) 0 0; }
+  .time { font-size: 17px; line-height: 28px; font-weight: 400; letter-spacing: 0; color: var(--ink-muted); white-space: nowrap; }
+  ul, ol { padding-left: 1.4em; }
+  li { margin: var(--space-2) 0; max-width: var(--measure); }
+  li::marker { color: var(--ink-muted); }
+
+  dl.terms dt { font-weight: 600; margin-top: var(--space-4); }
+  dl.terms dd { margin: var(--space-1) 0 0; color: var(--ink-muted); max-width: var(--measure); }
+
+  /* "Why this matters" panels */
+  .why {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-6);
+  }
+  main p.why { margin-top: var(--space-6); }
+  .note { color: var(--ink-muted); }
+
+  /* Prompt or code block */
+  .code-wrap {
+    margin: var(--space-6) 0 var(--space-6);
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  }
+  .code-label {
+    display: flex; justify-content: space-between; align-items: center; gap: var(--space-4);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 13px; line-height: 18px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
+  }
+  pre {
+    margin: 0; padding: var(--space-6);
+    font-family: var(--font-mono); font-size: 15px; line-height: 24px; font-weight: 400;
+    white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink);
+  }
+  .copy-btn { min-height: 44px; padding: 8px 16px; font-size: 15px; }
+
+  /* Sidebar build notes */
+  aside.side .card { gap: var(--space-4); font-size: 16px; line-height: 26px; }
+  aside.side .card + .card { margin-top: var(--space-4); }
+  aside.side h2 { font-size: 22px; line-height: 30px; letter-spacing: 0; }
+  aside.side ul { margin: 0; }
+  aside.side li { margin: var(--space-2) 0; }
+
+  .build-note { padding-bottom: var(--space-24); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .tutorial-intro { padding: var(--space-12) 0 var(--space-6); }
+    .lede { font-size: 17px; line-height: 28px; }
+    .build-note { padding-bottom: var(--space-12); }
+    main h2 { margin-top: var(--space-12); }
+    .why { padding: var(--space-4); }
+    .code-label { padding-left: var(--space-4); }
+    pre { padding: var(--space-4); }
+  }
+  .actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-4); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#tutorial">Skip to content</a>
+
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <a href="https://ahmads.build/" class="logo"><img src="https://ahmads.build/images/logo.png" alt="Build 52 by Ahmad Iqbal – home" width="107" height="32"></a>
+    <div class="nav-menu" id="nav-menu">
+      <a href="https://ahmads.build/about/">About</a>
+      <a href="https://www.linkedin.com/in/ahmadiqbal1" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2LftEg_0td3W-pWEFQwLBZ6LC8GmgLlSoYkhCQzig38rFytq_mOt4pI7OCqQhuaOxfuIOIdP54" class="btn btn-primary">Book a call</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="container">
+<header class="tutorial-intro">
+  <a href="https://ahmads.build/resources/" class="back">← Build with me</a>
+  <img src="https://ahmads.build/images/agents/sales-agent.png" alt="Sales agent avatar: a halftone black labrador in sunglasses" width="120" height="120" class="agent-avatar">
+  <p class="eyebrow">Agent #3 · Built in public</p>
+  <h1>Sales Agent tutorial</h1>
+  <p class="lede">Build an agent that finds your ideal customers and drafts your outreach, for about half a cent per business. About 30 minutes of setup. No coding needed.</p>
+  <p class="install-note">Just want to use it? <a href="/">Install the ready-made agent</a>.</p>
+</header>
+
+<div class="layout">
+<main id="tutorial">
+
+  <h2 id="what">What you'll build</h2>
+  <p>You tell the agent what you sell and who you want to reach. It then does four things:</p>
+  <ol>
+    <li><strong>Finds</strong> matching businesses on Google Maps.</li>
+    <li><strong>Fetches</strong> emails, phone numbers, WhatsApp links and Instagram from each business's website, using plain code that costs nothing.</li>
+    <li><strong>Qualifies</strong> each business with a small, cheap Claude model: the owner, the address, three notes, and whether it fits.</li>
+    <li><strong>Pitches</strong> the good fits with a stronger Claude model: what they need, why you're a match, a WhatsApp opener and a short email.</li>
+  </ol>
+  <p>It never sends anything. You read the drafts and send the ones you like.</p>
+
+  <h2 id="need">What you need</h2>
+  <ul>
+    <li>A Mac or PC, and <strong>Claude Code</strong>.</li>
+    <li><strong>Python</strong> 3.10 or newer. It's free.</li>
+    <li><strong>Claude API access.</strong> Pay as you go; a 20-lead run costs under $0.10.</li>
+    <li>A <strong>Google Cloud</strong> account. The first 1,000 searches a month were free when I wrote this.</li>
+  </ul>
+
+  <h2 id="words">Four words you'll see</h2>
+  <dl class="terms">
+    <dt>Claude Code</dt>
+    <dd>Claude with hands. It can create files and run commands on your computer, and it asks before doing anything that matters.</dd>
+    <dt>API</dt>
+    <dd>The way a script talks to a service like Claude or Google Maps. API access is billed per use and is separate from a Claude subscription.</dd>
+    <dt>Key</dt>
+    <dd>A password for a script. Never paste one into a chat, an email or a screenshot. If you do, replace it.</dd>
+    <dt>Campaign</dt>
+    <dd>One business plus one kind of customer to find, described in four short plain-English files.</dd>
+  </dl>
+
+  <div data-gate="tutorial">
+
+  <h2 id="step1">Step 1: Install Claude Code <span class="time">(5 minutes)</span></h2>
+  <ol>
+    <li>Go to <a href="https://claude.com/claude-code">claude.com/claude-code</a> and follow the install steps for your computer. The desktop app is easiest if you've never used a terminal.</li>
+    <li>Sign in with your Claude account.</li>
+    <li>Create an empty folder for this project and open it in Claude Code.</li>
+  </ol>
+
+  <h2 id="step2">Step 2: Install Python <span class="time">(5 minutes)</span></h2>
+  <p>You need version 3.10 or newer. Macs come with an older one. On a Mac, open Terminal and run:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Command</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>brew install python@3.12</code></pre>
+  </div>
+  <p>If Terminal says it can't find <code>brew</code>, install Homebrew first from <a href="https://brew.sh">brew.sh</a>. On Windows, download Python from <a href="https://www.python.org/downloads/">python.org</a> and tick "Add Python to PATH".</p>
+  <p class="why">You can also skip this and tell Claude Code "install Python 3.12 for me". It asks for your approval and does it.</p>
+
+  <h2 id="step3">Step 3: Get Claude API access <span class="time">(5 minutes)</span></h2>
+  <ol>
+    <li>Sign in at <a href="https://console.anthropic.com">console.anthropic.com</a>.</li>
+    <li>Add a payment method or a little credit under Billing. $5 is plenty to start.</li>
+    <li>Set a monthly spend limit, for example $20. This is your safety net.</li>
+    <li>When the Console asks where your code runs, choose <strong>Your own machine</strong>. You sign in through your browser and no key is stored on your computer.</li>
+  </ol>
+  <p>On a Mac, that sign-in is two commands:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Command</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>brew install anthropics/tap/ant</code></pre>
+  </div>
+  <div class="code-wrap">
+    <div class="code-label"><span>Command</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>ant auth login</code></pre>
+  </div>
+
+  <h2 id="step4">Step 4: Get a Google Maps key <span class="time">(10 minutes)</span></h2>
+  <ol>
+    <li>Sign in at <a href="https://console.cloud.google.com">console.cloud.google.com</a> and create a new project.</li>
+    <li>Turn on billing. Google asks for a card even for free usage.</li>
+    <li>Search for <strong>Places API (New)</strong> and click <strong>Enable</strong>. It must be the one marked "(New)".</li>
+    <li>Copy the API key Google shows you.</li>
+    <li>When Google offers to protect the key, choose <strong>API restriction</strong>, tick only <strong>Places API (New)</strong>, and click <strong>Restrict key</strong>.</li>
+    <li>Open <strong>Quotas</strong> and lower the daily Text Search limit to 100. One run uses about 8 to 24.</li>
+  </ol>
+  <p>Now save the key on your computer. On a Mac, this opens your settings file in TextEdit:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Command</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>open -e ~/.zshrc</code></pre>
+  </div>
+  <p>Add this line at the bottom with your key between the quotes, then save and close:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Line to add</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>export GOOGLE_MAPS_API_KEY="paste-your-key-here"</code></pre>
+  </div>
+  <p class="why">A restricted key can do nothing else, even if it leaks. The daily limit means a mistake can't run up a bill.</p>
+
+  <h2 id="step5">Step 5: Install the agent <span class="time">(1 minute)</span></h2>
+  <p>In Claude Code, run these one at a time:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Command</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>/plugin marketplace add ahmadiqbal-tmitm/sales-agent</code></pre>
+  </div>
+  <div class="code-wrap">
+    <div class="code-label"><span>Command</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>/plugin install sales-agent@ahmads-build</code></pre>
+  </div>
+  <p>Then say "Set up Sales Agent". It checks everything above and fixes what's missing.</p>
+
+  <h2 id="step6">Step 6: Create your first campaign <span class="time">(10 minutes)</span></h2>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>Set up a Sales Agent campaign for my business</code></pre>
+  </div>
+  <p>Claude interviews you and writes four files:</p>
+  <dl class="terms">
+    <dt>offer.txt</dt>
+    <dd>Who you are, what you sell, true proof points, the sender's name and your tone.</dd>
+    <dt>searches.txt</dt>
+    <dd>Google Maps searches, one per line. "Hair salon in Dubai Marina" beats "salon Dubai".</dd>
+    <dt>criteria.txt</dt>
+    <dd>Who counts as a good fit, for example "independent, 1 or 2 locations, in these three areas".</dd>
+    <dt>notes.txt</dt>
+    <dd>What you want to know about each lead before you call.</dd>
+  </dl>
+  <p class="why">Only put true facts in the offer. The pitch writer is told never to invent prices, clients or results, so it can only be as convincing as the facts you give it.</p>
+
+  <h2 id="step7">Step 7: Run it <span class="time">(5 minutes)</span></h2>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>Run my campaign for 20 leads</code></pre>
+  </div>
+  <p>Claude shows the most the run could cost, asks for your go-ahead, runs it, and checks a few pitches against the facts. The results are a spreadsheet file in your campaign's folder.</p>
+  <p>Start with 20 leads. Read every pitch. Adjust your files, then scale up.</p>
+
+  <h2 id="prompts">Build it from scratch</h2>
+  <p>You don't have to install my version. I built this by talking to Claude Code, and these are the requests that mattered, in order.</p>
+  <ol>
+    <li><strong>Start with the expensive version.</strong> "Find me 100 salons with websites, phone numbers, emails and owner names, in a sheet."</li>
+    <li><strong>Ask what it cost.</strong> "How many tokens did that use, and what did it cost?" Mine was about $30.</li>
+    <li><strong>Ask for a cheaper design.</strong> "How can we do this cheaper without losing quality?"</li>
+    <li><strong>Have it built and tested.</strong> "Build that as a script, and test the free parts on 20 sites we already have."</li>
+    <li><strong>Make it work for any business.</strong> "Would this work for holiday homes instead of salons?"</li>
+    <li><strong>Add the finding step.</strong> "Use Google Places to find the businesses, so I don't need a starting list."</li>
+    <li><strong>Add the pitch step.</strong> "Use a stronger model to find the gap between what each lead needs and what I sell, and draft the outreach."</li>
+    <li><strong>Make it repeatable.</strong> "Write a skill so you run this the same way every time."</li>
+    <li><strong>Run it small, then check.</strong> "Run it for 20 leads, with no duplicates of my sheet."</li>
+  </ol>
+  <p class="why">The rule behind all of it: use the cheapest thing that can do each job. Code for anything that follows a pattern, a small model for reading and sorting, and a strong model only for the writing a customer will see.</p>
+
+  <h2 id="safe">Staying safe</h2>
+  <ul>
+    <li>The agent drafts messages. A person sends them.</li>
+    <li>Restrict every key to one job, cap its daily use, and replace it if it's ever exposed.</li>
+    <li>Set a spend limit in the Anthropic Console before your first run.</li>
+    <li>Websites that block automated visitors are left alone and marked "check by hand".</li>
+  </ul>
+
+  </div>
+
+</main>
+
+<aside class="side" aria-label="About this build">
+  <section class="card">
+    <h2>Why I built this</h2>
+    <p>I asked Claude to research 100 salons for a family-run laundry service. The list was good, but it cost about $30. Most of that work didn't need intelligence, so I rebuilt it to use code for the routine parts.</p>
+  </section>
+  <section class="card">
+    <h2>What I learned</h2>
+    <ul>
+      <li>Ask what things cost. The first version worked, at 60 times the price.</li>
+      <li>Most of an "AI task" isn't AI.</li>
+      <li>Screen leads before you research them.</li>
+      <li>Test on answers you already have.</li>
+      <li>Cheaper has a price: it finds fewer owner names.</li>
+    </ul>
+  </section>
+</aside>
+
+</div>
+
+<p class="caption build-note">Built by Ahmad Iqbal as part of building one agent a week, in public. More at <a href="https://ahmads.build">ahmads.build</a>.</p>
+</div>
+  <section class="site-cards container" aria-label="Explore the site">
+    <div class="cards">
+      <article class="card">
+        <h2 class="h3">Writing</h2>
+        <p>Weekly notes on what I'm building and learning.</p>
+        <a href="https://ahmads.build/writing/" class="card-link">Read the latest</a>
+      </article>
+      <article class="card">
+        <h2 class="h3">Build with me</h2>
+        <p>Templates and guides to build your own agents.</p>
+        <a href="https://ahmads.build/resources/" class="card-link">See the guides</a>
+      </article>
+      <article class="card">
+        <h2 class="h3">Agents</h2>
+        <p>Ready-made agents to install in Claude. No code needed.</p>
+        <a href="https://ahmads.build/agents/" class="card-link">Install an agent</a>
+      </article>
+    </div>
+  </section>
+
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <p class="main-line">AI happening to you → AI working for you.</p>
+    <ul class="footer-links">
+      <li><a href="https://ahmads.build/about/">About</a></li>
+      <li><a href="https://ahmads.build/writing/">Writing</a></li>
+      <li><a href="https://ahmads.build/resources/">Build with me</a></li>
+      <li><a href="https://ahmads.build/agents/">Agents</a></li>
+      <li><a href="https://ahmads.build/office-hours/">Office hours</a></li>
+      <li><a href="https://www.linkedin.com/in/ahmadiqbal1" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+    <p class="copyright">© 2026 Ahmad Iqbal · ahmads.build</p>
+  </div>
+</footer>
+
+<p class="sr-only" aria-live="polite" id="copy-status"></p>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    var label = btn.closest('.code-label').querySelector('span');
+    if (label) btn.setAttribute('aria-label', 'Copy ' + label.textContent.trim().toLowerCase());
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code-wrap').querySelector('code').innerText;
+      var status = document.getElementById('copy-status');
+      function done(ok) {
+        btn.textContent = ok ? 'Copied' : 'Select and copy';
+        status.textContent = ok ? 'Copied to clipboard' : 'Copy failed. Select the text and copy it manually.';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(function () { done(true); }, function () { done(false); });
+      } else { done(false); }
+    });
+  });
+</script>
+</body>
+</html>
