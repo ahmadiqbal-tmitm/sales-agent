@@ -1,0 +1,14 @@
+{
+  "name": "ahmads-build",
+  "description": "Agent builds from ahmads.build, one a week.",
+  "owner": {
+    "name": "ahmads.build"
+  },
+  "plugins": [
+    {
+      "name": "sales-agent",
+      "source": "./plugins/sales-agent",
+      "description": "Find local businesses on Google Maps, qualify them cheaply with Claude Haiku, and draft tailored outreach with Claude Opus."
+    }
+  ]
+}

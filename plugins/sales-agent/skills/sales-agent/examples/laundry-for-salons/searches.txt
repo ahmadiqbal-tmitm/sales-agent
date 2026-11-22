@@ -1,0 +1,7 @@
+# One Google Maps search per line. Each returns up to 60 places.
+hair salon in Dubai Marina
+barbershop in Dubai Marina
+hair salon in JLT
+barbershop in JLT
+beauty salon in Business Bay
+barbershop in Business Bay

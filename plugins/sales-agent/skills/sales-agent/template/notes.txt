@@ -1,0 +1,3 @@
+# What the 3 notes about each lead should focus on: facts a salesperson for this client wants before calling.
+# Example: "curriculum, school size, whether they mention science labs or practical experiments".
+REPLACE THIS

@@ -1,0 +1,12 @@
+# Who the client is and what they sell. Claude Opus uses this to write each pitch.
+# Only true facts: Claude is told never to invent prices, clients or results.
+# Lines starting with # are notes for you and are never sent to Claude.
+# Example: "Business: Lab Supply Co, sells preserved frogs and dissection kits to schools."
+
+REPLACE THIS
+Business:
+Sender:
+What we sell:
+How it works (delivery, minimum order, area covered):
+Why customers choose us (true proof points):
+Tone:

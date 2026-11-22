@@ -1,0 +1,6 @@
+# Who counts as a good fit, in plain English. Haiku marks each lead yes / no / unclear against this.
+# Example: "A secondary school in the UAE that teaches biology or science practicals."
+REPLACE THIS
+A good fit is ...
+Mark "no" if ...
+Mark "unclear" if the website doesn't say enough to decide.

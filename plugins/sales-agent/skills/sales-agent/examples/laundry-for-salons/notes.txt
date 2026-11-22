@@ -1,0 +1,5 @@
+Pick facts a laundry salesperson would want before calling a salon:
+- services that use a lot of towels or capes (colour, shaves, facials, spa treatments, nails);
+- size: number of chairs, stylists or branches;
+- price level and clientele;
+- booking system, founding year, or anything showing how busy they are.

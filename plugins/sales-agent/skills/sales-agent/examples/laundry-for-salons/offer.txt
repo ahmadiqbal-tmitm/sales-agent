@@ -1,0 +1,9 @@
+# Example campaign: a laundry service looking for salons. Copy the style, not the facts.
+# Lines starting with # are notes for you and are never sent to Claude.
+
+Business: Fresh Fold, a family-run laundry service in Dubai.
+Sender: Sam from Fresh Fold.
+What we do: we collect, wash, dry and fold towels and capes for salons and barbershops.
+How it works: pickup and drop-off on our regular route through Dubai Marina, JLT and Business Bay.
+Why salons choose us: they get clean towels back without running washing machines on site or tying up staff.
+Tone: friendly, local and personal. Offer a quick chat or to drop by the salon. Never pushy.

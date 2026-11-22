@@ -1,0 +1,3 @@
+# One Google Maps search per line. Each returns up to 60 places.
+# Example for a lab-supply client: "high school in Dubai", "secondary school in Sharjah".
+REPLACE THIS
